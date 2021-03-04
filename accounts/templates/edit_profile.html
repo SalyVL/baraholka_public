@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+	<section class = 'register-container'>
+
+		<form method="POST" action="" enctype="multipart/form-data" id = 'form_register'>
+			{% csrf_token %}
+			<div id="reg-data-container">
+				<div id = 'register-window'>
+					{{ form.non_field_errors }}
+					{% for field in form %}
+						{% for error in field.errors %}
+							<a style = "color: #c0392b; font-size: 24px; margin: auto;">{{error}}</a>
+						{% endfor %}
+						{% if field.name == 'profile_pic' %}
+							<a style = 'font-family: Montserrat; font-style: normal; font-weight: bold; margin-left: 20px;'>Фотография профиля</a>
+							{{ field }}
+						{% else %}
+							{{field}}
+						{% endif %}
+					{% endfor %}
+				</div>
+
+
+				<div id="reg-button">
+					<a href = '#' onclick="document.getElementById('form_register').submit()">Сохранить</a>
+				</div>
+			</div>
+		</form>
+	</section>
+
+<script>
+	document.getElementById('id_profile_pic').style = 'background: none;'
+	var form_fields = document.getElementsByTagName('input')
+	form_fields[5].placeholder='Пароль';
+	form_fields[6].placeholder='Подтверждение пароля';
+</script>
+{% endblock %}

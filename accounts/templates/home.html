@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div id = 'jumbotron'>
+    <div id = 'jumbotron-container'>
+        <h1>Освободи свою жизнь<br>от ненужных вещей</h1>
+        <p>Размести объявление.<br>
+Обрадуй себя избавлением, а кого-то - приобретением.</p>
+        <div id = 'ad-button'><a href = "{% url 'create_ad' %}" >Добавить объявление</a></div>
+    </div>
+</div>
+
+<section class = 'content'>
+    <form method="GET", action="" id = 'find-ad-form'>
+        {{ filter.form }}
+        <div id="find_ad">
+            <a href = '#' onclick="document.getElementById('find-ad-form').submit()">Найти</a>
+        </div>
+    </form>
+
+    <div id="card-list">
+        {% for ad in ads %}
+            <div id="card">
+                <a href = "/ad/{{ad.id}}">
+                <div id="card-img"><img src="/static/images/{{ad.pic}}"></div>
+                <div id="card-title">{{ad.title}}</div>
+                <div id="card-text">{{ad.description | truncatechars:100 }}</div>
+                <div id="card-address">{{ad.address | truncatechars:20 | title}}</div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+
+{% endblock %}

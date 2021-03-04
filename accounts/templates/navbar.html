@@ -1,0 +1,73 @@
+<section class="navbar">
+
+    <div id="navbar-container">
+        <a id="logo" href = '/'>Барахолка</a>
+        <div id="mobile-login-button">
+            {% if user.is_authenticated %}
+                <a id = 'login' href = "{% url 'logout' %}">Выйти</a>
+            {% else %}
+                <a id = 'login' href = "{% url 'login' %}">Войти</a>
+            {% endif %}
+        </div>
+
+        <div id="mobile-menu-button">
+            <a onclick='mobile_menu()'><img src = 'static/svg/menu.svg'>Меню</a>
+        </div>
+
+        <ul id = 'menu'>
+            <li id = 'item'><a href = '/'>Главная</a></li>
+            {% if user.is_authenticated %}
+                <li id = 'item'><a href = '/profile/{{user.id}}'>Профиль</a></li>
+            {% else %}
+                <li id = 'item'><a href = "{% url 'login' %}" >Профиль</a></li>
+            {% endif %}
+            <li id = 'item'><a href = "{% url 'create_ad' %}">Добавить объявление</a></li>
+        </ul>
+        <div id="login-button">
+            {% if user.is_authenticated %}
+                <a id = 'login' href = "{% url 'logout' %}">Выйти</a>
+            {% else %}
+                <a id = 'login' href = "{% url 'login' %}">Войти</a>
+            {% endif %}
+        </div>
+    </div>
+
+</section>
+
+<script type="text/javascript">
+	function mobile_menu(){
+		var list = document.getElementById('menu');
+		if (list.style.display == 'none') {
+			list.style.opacity = 0;
+			list.style.display = 'flex';
+			var opacity = 0;
+			fps = 1000/60;  // 16.67 ms
+			function decrease () {
+			    opacity += 0.05;
+			    if (opacity >= 1){
+			        // complete
+			        list.style.opacity = 1;
+			        return true;
+			    }
+			    list.style.opacity = opacity;
+			    setTimeout(decrease,fps);
+			}
+			decrease();
+		} else {
+			var opacity = 1,
+			fps = 1000/60;  // 16.67 ms
+			function decrease () {
+			    opacity -= 0.05;
+			    if (opacity <= 0){
+			        // complete
+			        list.style.opacity = 0;
+			        list.style.display = 'none';
+			        return true;
+			    }
+			    list.style.opacity = opacity;
+			    setTimeout(decrease,fps);
+			}
+			decrease();
+		}
+	}
+</script>

@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+	<section class = 'profile_block'>
+		<a id = 'user_name'>{{user_name}}.</a>
+		<div id = 'user_card'>
+			<div id = 'user_leftside'>
+				<div id="user_pic"><img src="/static/images/{{profile.profile_pic}}"></div>
+				<a href = '/edit_profile' style="text-decoration: none; color: black;">Изменить фото</a>
+			</div>
+			<div id = 'user_rightside'>
+				<a id="address">г. Санкт-Петербург</a>
+				<a id="user_contact">Контакты</a>
+				<a id="user_number"><b>тел.:</b> {{profile.number}}</a>
+				<a id="user_email"><b>email.:</b> {{profile.email}}</a>
+				{% if request.user.id == profile.id %}
+					<div id="profile_edit">
+						<a href = '/edit_profile'>Редактировать</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+
+	<section class = 'content'>
+		<form method="GET", action="" id = 'find-ad-form'>
+			{{ filter.form }}
+			<div id="find_ad">
+				<a href = '#' onclick="document.getElementById('find-ad-form').submit()">Найти</a>
+			</div>
+		</form>
+
+		<div id="card-list">
+			{% for ad in ads %}
+				<div id="card">
+					<a href = "/ad/{{ad.id}}">
+					<div id="card-img"><img src="/static/images/{{ad.pic}}"></div>
+					<div id="card-title">{{ad.title}}</div>
+					<div id="card-text">{{ad.description | truncatechars:100 }}</div>
+					<div id="card-address">{{ad.address | truncatechars:20 }}</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+
+{% endblock %}

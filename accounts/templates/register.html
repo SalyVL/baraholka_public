@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+	<section class = 'register-container'>
+		<div id="register-text">
+			<p>Зарегистрируйся, чтобы добавить объявление  <img src = '../../static/svg/arrow.svg'></p>
+
+			<div id = 'auth-text'>
+				<h1>Уже есть аккаунт?</h1>
+				<a href = "{% url 'login' %}">Авторизоваться</a>
+			</div>
+		</div>
+
+		<form method="POST" action="" enctype="multipart/form-data" id = 'form_register'>
+			{% csrf_token %}
+			<div id="reg-data-container">
+				<div id = 'register-window'>
+					{{ form.non_field_errors }}
+					{% for field in form %}
+						{% for error in field.errors %}
+							<a style = "color: #c0392b; font-size: 24px; margin: auto;">{{error}}</a>
+						{% endfor %}
+						{{ field }}
+					{% endfor %}
+				</div>
+
+
+				<div id="reg-button">
+					<a href = '#' onclick="document.getElementById('form_register').submit()">Зарегистрироваться</a>
+				</div>
+			</div>
+		</form>
+	</section>
+
+<script>
+	var form_fields = document.getElementsByTagName('input')
+	form_fields[5].placeholder='Пароль';
+	form_fields[6].placeholder='Подтверждение пароля';
+</script>
+{% endblock %}

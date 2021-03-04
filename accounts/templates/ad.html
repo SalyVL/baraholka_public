@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+	<section class = 'ad_block'>
+		<a id = 'user_name' style="display: flex; flex-basis: 100%; margin-bottom: 40px;">{{ad.title}}</a>
+		<div id = 'ad_photo'><img src="/static/images/{{ad.pic}}"></div>
+		<a id = 'ad_description'>{{ ad.description }}</a>
+		<a id = 'ad_price'>{{ ad.price }}</a>
+		{% if request.user.id == ad.owner_id %}
+			<div style="display: flex; flex-basis: 100%; margin: 20px;"></div>
+			<div id="profile_edit" style="">
+				<a href = '/edit_ad/{{ad.id}}'>Редактировать</a>
+			</div>
+			<form method="POST" id = 'delete_ad_form' action="">
+				{% csrf_token %}
+				<div id="profile_edit" style="margin-right: 0px;">
+					<a href = '#' onclick="document.getElementById('delete_ad_form').submit()">Удалить</a>
+				</div>
+			</form>
+		{% endif %}
+	</section>
+	<section class = 'profile_block'>
+		<a id = 'user_name' style="font-size: 36px;">Добавил(-а)</a>
+		<div id = 'user_card'>
+			<div id = 'user_leftside'>
+				<div id="user_pic"><img src="/static/images/{{owner.profile_pic}}"></div>
+				<a style="font-weight: bold; color: black;">{{user_name | title}}.</a>
+			</div>
+			<div id = 'user_rightside'>
+				<a id="address">г. {{ad.address | title}}</a>
+				<a id="user_contact">Контакты</a>
+				<a id="user_number"><b>тел.:</b> {{owner.number}}</a>
+				<a id="user_email"><b>email.:</b> {{owner.email}}</a>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

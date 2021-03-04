@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+	<section class = 'register-container'>
+		<p id = 'create_ad_text'>Редактирование объявления</p>
+		<div id="reg-data-container">
+			<form method="POST" action="" enctype="multipart/form-data" id = 'form_create_ad'>
+			{% csrf_token %}
+			<div id = 'create_ad_title'>
+				{% for field in form %}
+					{% for error in field.errors %}
+						<a style = "color: #c0392b; font-size: 24px; margin: auto;">{{error}}</a>
+					{% endfor %}
+					{% if field.name == 'pic' %}
+						<a style = 'font-family: Montserrat; font-style: normal; font-weight: bold; margin-left: 20px;'>Фотография объявления</a>
+						{{ field }}
+					{% else %}
+						{{field}}
+					{% endif %}
+				{% endfor %}
+				<div id="create_ad">
+					<a href = '#' onclick="document.getElementById('form_create_ad').submit()">Сохранить</a>
+				</div>
+			</div>
+			</form>
+		</div>
+	</section>
+<script>
+	document.getElementsByTagName('select')[0].options[0].innerHTML = 'Категория товара';
+	document.getElementById('id_pic').style.background = 'none';
+</script>
+{% endblock %}
