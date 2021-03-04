@@ -1,7 +1,7 @@
 # baraholka_public
 <details> 
   <summary>Скриншоты сайта</summary>
-  ![Alt text](/baraholka_public/main/screenshots/home.png?raw=true "Главная страница")
+  ![Alt text](/main/screenshots/home.png?raw=true "Главная страница")
   ![Alt text](/screenshots/someone's profile.png?raw=true "Профиль другого пользователя")
   ![Alt text](/screenshots/own profile.png?raw=true "Свой профиль")
   ![Alt text](/screenshots/create ad.png?raw=true "Создание объявления")
